@@ -11,7 +11,7 @@ final class FakeEntity implements Entity {
 		$this->structure = $structure;
 	}
 
-	public function structure(string $text = self::NO_SOURCE): array {
+	public function structure(string $text = ''): array {
 		return $this->structure;
 	}
 }

@@ -24,7 +24,7 @@ final class EntityInText implements Entity {
 		$this->end = $end;
 	}
 
-	public function structure(string $text = self::NO_SOURCE): array {
+	public function structure(string $text = ''): array {
 		if (!($this->occurrences($text, $this->value) === 1 || $this->end))
 			throw new \UnexpectedValueException(
 				sprintf(

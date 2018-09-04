@@ -37,7 +37,7 @@ final class Wit {
 					],
 				] + $this->fields($body)
 			);
-			return json_decode($this->execution($curl), true);
+			return $this->decode($this->execution($curl));
 		} finally {
 			curl_close($curl);
 		}
@@ -46,7 +46,7 @@ final class Wit {
 	private function url(string $endpoint): string {
 		return sprintf(
 			strpos($endpoint, '?') === false ? '%s?v=%s' : '%s&v=%s',
-			self::URL . $endpoint,
+			rtrim(self::URL, '/') . $endpoint,
 			self::VERSION
 		);
 	}
@@ -64,10 +64,19 @@ final class Wit {
 		if ($response === false)
 			throw new \UnexpectedValueException(
 				sprintf(
-					"Wit HTTP request error with response code %s: '%s'",
+					"Wit request error with status code %s: '%s'",
 					curl_errno($curl),
 					curl_error($curl)
 				)
+			);
+		return $response;
+	}
+
+	private function decode(string $json): array {
+		$response = json_decode($json, true);
+		if (isset($response['error']))
+			throw new \UnexpectedValueException(
+				sprintf("Wit response error: '%s'", $response['error'])
 			);
 		return $response;
 	}
