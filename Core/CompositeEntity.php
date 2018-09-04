@@ -13,7 +13,7 @@ final class CompositeEntity implements Entity {
 		$this->subentities = $subentities;
 	}
 
-	public function structure(string $text = self::NO_SOURCE): array {
+	public function structure(string $text = ''): array {
 		$structure = $this->origin->structure($text);
 		return $structure + [
 			'subentities' => array_map(

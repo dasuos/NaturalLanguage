@@ -5,7 +5,5 @@ namespace Dasuos\NaturalLanguage;
 
 interface Entity {
 
-	public const NO_SOURCE = '';
-
-	public function structure(string $text = self::NO_SOURCE): array;
+	public function structure(string $text = ''): array;
 }

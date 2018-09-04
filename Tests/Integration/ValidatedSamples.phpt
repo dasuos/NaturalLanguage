@@ -19,7 +19,7 @@ final class ValidatedSamples extends \Tester\TestCase {
 
 	use TestCase\AccessToken;
 
-	public function testValidatingGettingAndDeletingSample() {
+	public function testValidatingAndDeletingSampleWithFakeEntity() {
 		$samples = new NaturalLanguage\ValidatedSamples(
 			new NaturalLanguage\Wit($this->token)
 		);

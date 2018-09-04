@@ -12,13 +12,11 @@ final class ValidatedSamples implements Samples {
 	}
 
 	public function validate(string $text, Entity ...$entities): void {
-		$response = $this->wit->response(
+		$this->wit->response(
 			'POST',
-			'samples',
+			'/samples',
 			[['text' => $text, 'entities' => $this->entities($text, $entities)]]
 		);
-		if (!$this->sent($response))
-			$this->throw('Sample validation failed', $response);
 	}
 
 	public function all(
@@ -27,25 +25,19 @@ final class ValidatedSamples implements Samples {
 		array $ids = [],
 		array $values = []
 	): array {
-		$response = $this->wit->response(
+		return $this->wit->response(
 			'GET',
 			sprintf(
-				'samples?limit=%s&offset=%s',
-				$limit,
-				$offset
-				. $this->filter('entity_ids', $ids)
-				. $this->filter('entity_values', $values)
+				'/samples?%s',
+				$this->filter($limit, $offset, $ids, $values)
 			)
 		);
-		if ($this->sent($response))
-			return $response;
-		$this->throw('Getting sample list failed', $response);
 	}
 
 	public function delete(array $texts): void {
-		$response = $this->wit->response(
+		$this->wit->response(
 			'DELETE',
-			'samples',
+			'/samples',
 			array_map(
 				static function($text) {
 					return ['text' => $text];
@@ -53,8 +45,6 @@ final class ValidatedSamples implements Samples {
 				$texts
 			)
 		);
-		if (!$this->sent($response))
-			$this->throw('Sample delete failed', $response);
 	}
 
 	private function entities(string $text, array $entities): array {
@@ -66,20 +56,20 @@ final class ValidatedSamples implements Samples {
 		);
 	}
 
-	private function filter(string $name, array $list): string {
-		return $list ? sprintf('&%s=%s', $name, implode(',', $list)) : '';
-	}
-
-	private function sent(array $response): bool {
-		return !isset($response['error']);
-	}
-
-	private function throw(string $message, array $response): void {
-		throw new \UnexpectedValueException(
-			sprintf(
-				'%s: %s',
-				$message,
-				$response['error']
+	private function filter(
+		int $limit,
+		int $offset,
+		array $ids,
+		array $values
+	): string {
+		return http_build_query(
+			array_filter(
+				[
+					'limit' => $limit,
+					'offset' => $offset,
+					'entity_ids' => implode(',', $ids),
+					'entity_values' => $ids ? implode(',', $values) : '',
+				]
 			)
 		);
 	}
