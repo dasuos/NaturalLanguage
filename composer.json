@@ -1,0 +1,44 @@
+{
+  "name": "dasuos/natural-language",
+  "description": "Library processing natural language using Wit.ai platform",
+  "type": "library",
+  "homepage": "https://github.com/dasuos/natural-language",
+  "keywords": [
+    "natural language processing",
+    "nlp"
+  ],
+  "authors": [
+    {
+      "name": "Daniel Krnak",
+      "email": "dasuos256@gmail.com",
+      "homepage": "https://www.github.com/dasuos",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "dasuos/configuration": "^0.0.3"
+  },
+  "require-dev": {
+    "nette/tester": "^2.0.2",
+    "jakub-onderka/php-parallel-lint": "^1.0.0",
+    "phpstan/phpstan": "^0.10.3",
+    "slevomat/coding-standard": "^4.7.2",
+    "consistence/coding-standard": "^3.5",
+    "phing/phing": "^2.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dasuos\\NaturalLanguage\\": [
+        "Core/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Dasuos\\NaturalLanguage\\": [
+        "Tests/"
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.gitattributes export-ignore
+.gitignore export-ignore
+phpstan.neon export-ignore
+ruleset.xml export-ignore
+build.xml export-ignore
+Tests/ export-ignore
