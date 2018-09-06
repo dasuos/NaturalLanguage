@@ -5,12 +5,12 @@ namespace Dasuos\NaturalLanguage;
 
 interface Samples {
 
-	public function validate(string $text, Entity ...$entity): void;
+	public function validate(Sample ...$samples): array;
 	public function all(
 		int $limit,
 		int $offset = 0,
 		array $ids = [],
 		array $values = []
 	): array;
-	public function delete(array $texts): void;
+	public function delete(string ...$texts): array;
 }
