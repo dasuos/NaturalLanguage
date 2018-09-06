@@ -3,12 +3,14 @@ declare(strict_types = 1);
 
 namespace Dasuos\NaturalLanguage;
 
-interface Wit {
+final class FakeWit implements Wit {
 
 	public function response(
 		string $method,
 		string $endpoint,
 		array $body = [],
 		array $query = []
-	): array;
+	): array {
+		return [$method, $endpoint, $body, $query];
+	}
 }
