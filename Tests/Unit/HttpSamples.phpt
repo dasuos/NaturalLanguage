@@ -16,8 +16,6 @@ require __DIR__ . '/../bootstrap.php';
 
 final class HttpSamples extends \Tester\TestCase {
 
-	use TestCase\AccessToken;
-
 	public function testValidatingSingleSampleAndPositioningEntity() {
 		Assert::same(
 			[

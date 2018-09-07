@@ -16,8 +16,6 @@ require __DIR__ . '/../bootstrap.php';
 
 final class PositioningSample extends \Tester\TestCase {
 
-	use TestCase\AccessToken;
-
 	public function testReturningSampleStructureWithIntentOnly() {
 		Assert::same(
 			[
