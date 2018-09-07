@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Dasuos\NaturalLanguage;
 
-final class PositionedSample implements Sample {
+final class PositioningSample implements Sample {
 
 	private $text;
 	private $entities;
@@ -23,12 +23,8 @@ final class PositionedSample implements Sample {
 	private function entities(string $text, array $entities): array {
 		return array_map(
 			function($entity) use ($text) {
-				return [
-					'entity' => $entity['entity'],
-					'value' => $entity['value'],
-				]
-				+ $this->positioning($text, $entity)
-				+ $this->subentities($entity);
+				return $this->entity($entity, $text)
+					+ $this->subentities($entity);
 			},
 			$entities
 		);
@@ -38,20 +34,26 @@ final class PositionedSample implements Sample {
 		return isset($entity['subentities'])
 			? array_map(
 				function($subentity) use ($entity) {
-					return [
-						'entity' => $subentity['entity'],
-						'value' => $subentity['value'],
-					] + $this->positioning($entity['value'], $subentity);
+					return $this->entity($subentity, $entity['value']);
 				},
 				$entity['subentities']
 			)
 			: [];
 	}
 
-	private function positioning(string $text, array $entity): array {
-		$start = strpos($text, $entity['value']);
+	private function entity(array $entity, string $text): array {
+		return [
+			'entity' => $entity['entity'],
+			'value' => $entity['value'],
+		] + $this->position($entity, $text);
+	}
+
+	private function position(array $entity, string $text): array {
+		$start = $entity['start'] ?? strpos($text, $entity['value']);
 		return $start !== false
-			? ['start' => $start, 'end' => $start + strlen($entity['value'])]
-			: [];
+			? [
+				'start' => $start,
+				'end' => $entity['end'] ?? $start + strlen($entity['value']),
+			] : [];
 	}
 }
