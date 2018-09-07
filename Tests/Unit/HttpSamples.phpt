@@ -42,7 +42,7 @@ final class HttpSamples extends \Tester\TestCase {
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
 			))->validate(
-				new NaturalLanguage\PositionedSample(
+				new NaturalLanguage\PositioningSample(
 					'I want to fly to London',
 					['entity' => 'intent', 'value' => 'flight_request'],
 					['entity' => 'wit$location', 'value' => 'London']
@@ -86,7 +86,7 @@ final class HttpSamples extends \Tester\TestCase {
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
 			))->validate(
-				new NaturalLanguage\PositionedSample(
+				new NaturalLanguage\PositioningSample(
 					'I want a blue ford',
 					[
 						'entity' => 'car',
@@ -143,12 +143,12 @@ final class HttpSamples extends \Tester\TestCase {
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
 			))->validate(
-				new NaturalLanguage\PositionedSample(
+				new NaturalLanguage\PositioningSample(
 					'I want to fly to London',
 					['entity' => 'intent', 'value' => 'flight_request'],
 					['entity' => 'wit$location', 'value' => 'London']
 				),
-				new NaturalLanguage\PositionedSample(
+				new NaturalLanguage\PositioningSample(
 					'I want to fly to Amsterdam',
 					['entity' => 'intent', 'value' => 'flight_request'],
 					['entity' => 'wit$location', 'value' => 'Amsterdam']

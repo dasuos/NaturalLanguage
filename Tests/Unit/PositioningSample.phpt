@@ -14,7 +14,7 @@ require __DIR__ . '/../bootstrap.php';
  * @phpVersion > 7.1
  */
 
-final class PositionedSample extends \Tester\TestCase {
+final class PositioningSample extends \Tester\TestCase {
 
 	use TestCase\AccessToken;
 
@@ -26,7 +26,7 @@ final class PositionedSample extends \Tester\TestCase {
 					['entity' => 'intent', 'value' => 'flight_request'],
 				],
 			],
-			(new NaturalLanguage\PositionedSample(
+			(new NaturalLanguage\PositioningSample(
 				'I want to fly to London',
 				['entity' => 'intent', 'value' => 'flight_request']
 			))->structure()
@@ -48,7 +48,7 @@ final class PositionedSample extends \Tester\TestCase {
 					],
 				],
 			],
-			(new NaturalLanguage\PositionedSample(
+			(new NaturalLanguage\PositioningSample(
 				'I want to fly to London',
 				['entity' => 'intent', 'value' => 'flight_request'],
 				['entity' => 'wit$location', 'value' => 'London']
@@ -82,7 +82,7 @@ final class PositionedSample extends \Tester\TestCase {
 					],
 				],
 			],
-			(new NaturalLanguage\PositionedSample(
+			(new NaturalLanguage\PositioningSample(
 				'I want a blue ford',
 				[
 					'entity' => 'car',
@@ -101,6 +101,57 @@ final class PositionedSample extends \Tester\TestCase {
 			))->structure()
 		);
 	}
+
+	public function testReturningSampleStructureWithPredefinedEntityPosition() {
+		Assert::same(
+			[
+				'text' => 'I want a blue ford',
+				'entities' => [
+					[
+						'entity' => 'car',
+						'value' => 'blue ford',
+						'start' => 9,
+						'end' => 18,
+						[
+							'entity' => 'color',
+							'value' => 'blue',
+							'start' => 0,
+							'end' => 4,
+						],
+						[
+							'entity' => 'model',
+							'value' => 'ford',
+							'start' => 5,
+							'end' => 9,
+						],
+					],
+				],
+			],
+			(new NaturalLanguage\PositioningSample(
+				'I want a blue ford',
+				[
+					'entity' => 'car',
+					'value' => 'blue ford',
+					'start' => 9,
+					'end' => 18,
+					'subentities' => [
+						[
+							'entity' => 'color',
+							'value' => 'blue',
+							'start' => 0,
+							'end' => 4,
+						],
+						[
+							'entity' => 'model',
+							'value' => 'ford',
+							'start' => 5,
+							'end' => 9,
+						],
+					],
+				]
+			))->structure()
+		);
+	}
 }
 
-(new PositionedSample)->run();
+(new PositioningSample)->run();
