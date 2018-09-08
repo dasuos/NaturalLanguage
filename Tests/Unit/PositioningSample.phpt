@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Dasuos\NaturalLanguage\Integration;
 
 use Tester\Assert;
-use Dasuos\NaturalLanguage\TestCase;
 use Dasuos\NaturalLanguage;
 
 require __DIR__ . '/../bootstrap.php';
