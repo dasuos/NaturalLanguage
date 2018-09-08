@@ -16,16 +16,15 @@ final class HttpWit implements Wit {
 
 	public function response(
 		string $method,
-		string $endpoint,
-		array $body = [],
-		array $query = []
+		Endpoint $endpoint,
+		array $body = []
 	): array {
 		$curl = curl_init();
 		try {
 			curl_setopt_array(
 				$curl,
 				[
-					CURLOPT_URL => $this->url($endpoint, $query),
+					CURLOPT_URL => $this->url(self::URL, $endpoint),
 					CURLOPT_RETURNTRANSFER => true,
 					CURLOPT_AUTOREFERER => true,
 					CURLOPT_FOLLOWLOCATION => true,
@@ -44,21 +43,8 @@ final class HttpWit implements Wit {
 		}
 	}
 
-	private function url(string $endpoint, array $data): string {
-		return sprintf(
-			'%s?%s',
-			rtrim(self::URL, '/') . $endpoint,
-			$this->query($data)
-		);
-	}
-
-	private function query(array $data): string {
-		return http_build_query(
-			['v' => self::VERSION] + $data,
-			'',
-			'&',
-			PHP_QUERY_RFC3986
-		);
+	private function url(string $base, Endpoint $endpoint): string {
+		return rtrim($base, '/') . $endpoint->reference(['v' => self::VERSION]);
 	}
 
 	private function fields(array $body): array {

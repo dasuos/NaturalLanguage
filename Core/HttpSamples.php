@@ -14,7 +14,7 @@ final class HttpSamples implements Samples {
 	public function validate(Sample ...$samples): array {
 		return $this->wit->response(
 			'POST',
-			'/samples',
+			new ParsedEndpoint('/samples'),
 			array_map(
 				static function(Sample $sample) {
 					return $sample->structure();
@@ -32,16 +32,17 @@ final class HttpSamples implements Samples {
 	): array {
 		return $this->wit->response(
 			'GET',
-			'/samples',
-			[],
-			array_filter(
-				[
-					'limit' => $limit,
-					'offset' => $offset,
-					'entity_ids' => implode(',', $ids),
-					'entity_values' => $ids ? implode(',', $values) : '',
-				],
-				'strlen'
+			new ParsedEndpoint(
+				'/samples',
+				array_filter(
+					[
+						'limit' => $limit,
+						'offset' => $offset,
+						'entity_ids' => implode(',', $ids),
+						'entity_values' => $ids ? implode(',', $values) : '',
+					],
+					'strlen'
+				)
 			)
 		);
 	}
@@ -49,7 +50,7 @@ final class HttpSamples implements Samples {
 	public function delete(string ...$texts): array {
 		return $this->wit->response(
 			'DELETE',
-			'/samples',
+			new ParsedEndpoint('/samples'),
 			array_map(
 				static function($text) {
 					return ['text' => $text];

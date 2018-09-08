@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Dasuos\NaturalLanguage\Integration;
 
 use Tester\Assert;
-use Dasuos\NaturalLanguage\TestCase;
 use Dasuos\NaturalLanguage;
 
 require __DIR__ . '/../bootstrap.php';
@@ -19,9 +18,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testValidatingSingleSampleAndPositioningEntity() {
 		Assert::same(
 			[
-				'POST',
-				'/samples',
-				[
+				'method' => 'POST',
+				'endpoint' => '/samples',
+				'body' => [
 					[
 						'text' => 'I want to fly to London',
 						'entities' => [
@@ -35,7 +34,6 @@ final class HttpSamples extends \Tester\TestCase {
 						],
 					],
 				],
-				[],
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -52,9 +50,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testValidatingSingleSampleAndPositioningCompositeEntity() {
 		Assert::same(
 			[
-				'POST',
-				'/samples',
-				[
+				'method' => 'POST',
+				'endpoint' => '/samples',
+				'body' => [
 					[
 						'text' => 'I want a blue ford',
 						'entities' => [
@@ -79,7 +77,6 @@ final class HttpSamples extends \Tester\TestCase {
 						],
 					],
 				],
-				[]
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -108,9 +105,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testValidatingManySamplesAndCalculatingPositionOfEntities() {
 		Assert::same(
 			[
-				'POST',
-				'/samples',
-				[
+				'method' => 'POST',
+				'endpoint' => '/samples',
+				'body' => [
 					[
 						'text' => 'I want to fly to London',
 						'entities' => [
@@ -136,7 +133,6 @@ final class HttpSamples extends \Tester\TestCase {
 						],
 					],
 				],
-				[],
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -158,15 +154,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testReturningFilteredSamples() {
 		Assert::same(
 			[
-				'GET',
-				'/samples',
-				[],
-				[
-					'limit' => 10,
-					'offset' => 0,
-					'entity_ids' => 'wit$location',
-					'entity_values' => 'London',
-				],
+				'method' => 'GET',
+				'endpoint' => '/samples?limit=10&offset=0&entity_ids=wit%24location&entity_values=London',
+				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -177,10 +167,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testReturningAllSamples() {
 		Assert::same(
 			[
-				'GET',
-				'/samples',
-				[],
-				['limit' => 10, 'offset' => 5],
+				'method' => 'GET',
+				'endpoint' => '/samples?limit=10&offset=5',
+				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -191,13 +180,9 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testReturningFilteredSamplesWithValuesWithoutEntities() {
 		Assert::same(
 			[
-				'GET',
-				'/samples',
-				[],
-				[
-					'limit' => 10,
-					'offset' => 0,
-				],
+				'method' => 'GET',
+				'endpoint' => '/samples?limit=10&offset=0',
+				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit
@@ -208,13 +193,12 @@ final class HttpSamples extends \Tester\TestCase {
 	public function testDeletingSamples() {
 		Assert::same(
 			[
-				'DELETE',
-				'/samples',
-				[
+				'method' => 'DELETE',
+				'endpoint' => '/samples',
+				'body' => [
 					['text' => 'I want to fly to London'],
 					['text' => 'I want to fly to Prague'],
 				],
-				[]
 			],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\FakeWit

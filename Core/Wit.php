@@ -7,8 +7,7 @@ interface Wit {
 
 	public function response(
 		string $method,
-		string $endpoint,
-		array $body = [],
-		array $query = []
+		Endpoint $endpoint,
+		array $body = []
 	): array;
 }
