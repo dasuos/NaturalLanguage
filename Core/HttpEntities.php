@@ -19,8 +19,13 @@ final class HttpEntities implements Entities {
 		);
 	}
 
-	public function all(): array {
-		return $this->wit->response('GET', new ParsedEndpoint('/entities'));
+	public function all(): \Iterator {
+		$entities = $this->wit->response(
+			'GET',
+			new ParsedEndpoint('/entities')
+		);
+		foreach ($entities as $entity)
+			yield new HttpEntity($this->wit, $entity);
 	}
 
 	public function delete(string $entity, string $role = ''): array {

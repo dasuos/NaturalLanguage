@@ -26,9 +26,9 @@ final class HttpWit implements Wit {
 				[
 					CURLOPT_URL => $this->url(self::URL, $endpoint),
 					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_AUTOREFERER => true,
-					CURLOPT_FOLLOWLOCATION => true,
-					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_AUTOREFERER => false,
+					CURLOPT_FOLLOWLOCATION => false,
+					CURLOPT_MAXREDIRS => 0,
 					CURLOPT_TIMEOUT => 30,
 					CURLOPT_CUSTOMREQUEST => strtoupper($method),
 					CURLOPT_HTTPHEADER => [
