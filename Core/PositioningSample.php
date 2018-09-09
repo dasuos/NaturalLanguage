@@ -37,15 +37,12 @@ final class PositioningSample implements Sample {
 					return $this->entity($subentity, $entity['value']);
 				},
 				$entity['subentities']
-			)
-			: [];
+			) : [];
 	}
 
 	private function entity(array $entity, string $text): array {
-		return [
-			'entity' => $entity['entity'],
-			'value' => $entity['value'],
-		] + $this->position($entity, $text);
+		return ['entity' => $entity['entity'], 'value' => $entity['value']]
+			+ $this->position($entity, $text);
 	}
 
 	private function position(array $entity, string $text): array {

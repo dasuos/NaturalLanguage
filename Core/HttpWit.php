@@ -44,7 +44,11 @@ final class HttpWit implements Wit {
 	}
 
 	private function url(string $base, Endpoint $endpoint): string {
-		return rtrim($base, '/') . $endpoint->reference(['v' => self::VERSION]);
+		return sprintf(
+			'%s/%s',
+			rtrim($base, '/'),
+			$endpoint->reference(['v' => self::VERSION])
+		);
 	}
 
 	private function fields(array $body): array {
