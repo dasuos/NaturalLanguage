@@ -45,11 +45,31 @@ final class HttpEntities extends \Tester\TestCase {
 	}
 
 	public function testReturningAllEntities() {
-		Assert::same(
-			['method' => 'GET', 'endpoint' => 'entities', 'body' => []],
-			(new NaturalLanguage\HttpEntities(
-				new NaturalLanguage\FakeWit
-			))->all()
+		$entities = [
+			'wit$amount_of_money',
+			'wit$contact',
+			'wit$temperature',
+		];
+		Assert::equal(
+			[
+				new NaturalLanguage\HttpEntity(
+					new NaturalLanguage\FakeWit($entities),
+					'wit$amount_of_money'
+				),
+				new NaturalLanguage\HttpEntity(
+					new NaturalLanguage\FakeWit($entities),
+					'wit$contact'
+				),
+				new NaturalLanguage\HttpEntity(
+					new NaturalLanguage\FakeWit($entities),
+					'wit$temperature'
+				)
+			],
+			iterator_to_array(
+				(new NaturalLanguage\HttpEntities(
+					new NaturalLanguage\FakeWit($entities)
+				))->all()
+			)
 		);
 	}
 

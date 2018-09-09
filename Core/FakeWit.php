@@ -5,12 +5,18 @@ namespace Dasuos\NaturalLanguage;
 
 final class FakeWit implements Wit {
 
+	private $response;
+
+	public function __construct(array $response = []) {
+		$this->response = $response;
+	}
+
 	public function response(
 		string $method,
 		Endpoint $endpoint,
 		array $body = []
 	): array {
-		return [
+		return $this->response ?: [
 			'method' => $method,
 			'endpoint' => $endpoint->reference(),
 			'body' => $body,
