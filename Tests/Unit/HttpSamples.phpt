@@ -19,7 +19,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'POST',
-				'endpoint' => '/samples',
+				'endpoint' => 'samples',
 				'body' => [
 					[
 						'text' => 'I want to fly to London',
@@ -51,7 +51,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'POST',
-				'endpoint' => '/samples',
+				'endpoint' => 'samples',
 				'body' => [
 					[
 						'text' => 'I want a blue ford',
@@ -106,7 +106,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'POST',
-				'endpoint' => '/samples',
+				'endpoint' => 'samples',
 				'body' => [
 					[
 						'text' => 'I want to fly to London',
@@ -155,7 +155,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'GET',
-				'endpoint' => '/samples?limit=10&offset=0&entity_ids=wit%24location&entity_values=London',
+				'endpoint' => 'samples?limit=10&offset=0&entity_ids=wit%24location&entity_values=London',
 				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
@@ -168,7 +168,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'GET',
-				'endpoint' => '/samples?limit=10&offset=5',
+				'endpoint' => 'samples?limit=10&offset=5',
 				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
@@ -181,7 +181,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'GET',
-				'endpoint' => '/samples?limit=10&offset=0',
+				'endpoint' => 'samples?limit=10&offset=0',
 				'body' => [],
 			],
 			(new NaturalLanguage\HttpSamples(
@@ -194,7 +194,7 @@ final class HttpSamples extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'DELETE',
-				'endpoint' => '/samples',
+				'endpoint' => 'samples',
 				'body' => [
 					['text' => 'I want to fly to London'],
 					['text' => 'I want to fly to Prague'],

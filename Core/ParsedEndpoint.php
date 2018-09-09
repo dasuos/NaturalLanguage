@@ -26,9 +26,6 @@ final class ParsedEndpoint implements Endpoint {
 	}
 
 	private function parse(string $resource, string $query): string {
-		return sprintf(
-			'/%s',
-			$query ? sprintf('%s?%s', $resource, $query) : $resource
-		);
+		return $query ? sprintf('%s?%s', $resource, $query) : $resource;
 	}
 }

@@ -17,7 +17,7 @@ final class ParsedEndpoint extends \Tester\TestCase {
 
 	public function testReturningResourceWithoutQuery() {
 		Assert::same(
-			'/resource',
+			'resource',
 			(new NaturalLanguage\ParsedEndpoint(
 				'/resource'
 			))->reference()
@@ -26,7 +26,7 @@ final class ParsedEndpoint extends \Tester\TestCase {
 
 	public function testReturningResourceWithMultipleParametersInQuery() {
 		Assert::same(
-			'/resource?foo=bar&bar=foo',
+			'resource?foo=bar&bar=foo',
 			(new NaturalLanguage\ParsedEndpoint(
 				'/resource',
 				['foo' => 'bar', 'bar' => 'foo']
@@ -36,7 +36,7 @@ final class ParsedEndpoint extends \Tester\TestCase {
 
 	public function testReturningResourceWithSingleParameterInQuery() {
 		Assert::same(
-			'/resource?foo=bar',
+			'resource?foo=bar',
 			(new NaturalLanguage\ParsedEndpoint(
 				'/resource',
 				['foo' => 'bar']

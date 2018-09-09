@@ -19,7 +19,7 @@ final class HttpEntities extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'POST',
-				'endpoint' => '/entities',
+				'endpoint' => 'entities',
 				'body' => [
 					'id' => 'favorite_city',
 					'doc' => 'A city that I like',
@@ -35,7 +35,7 @@ final class HttpEntities extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'POST',
-				'endpoint' => '/entities',
+				'endpoint' => 'entities',
 				'body' => ['id' => 'favorite_city'],
 			],
 			(new NaturalLanguage\HttpEntities(
@@ -46,7 +46,7 @@ final class HttpEntities extends \Tester\TestCase {
 
 	public function testReturningAllEntities() {
 		Assert::same(
-			['method' => 'GET', 'endpoint' => '/entities', 'body' => []],
+			['method' => 'GET', 'endpoint' => 'entities', 'body' => []],
 			(new NaturalLanguage\HttpEntities(
 				new NaturalLanguage\FakeWit
 			))->all()
@@ -57,7 +57,7 @@ final class HttpEntities extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'DELETE',
-				'endpoint' => '/entities/favorite_city',
+				'endpoint' => 'entities/favorite_city',
 				'body' => [],
 			],
 			(new NaturalLanguage\HttpEntities(
@@ -70,7 +70,7 @@ final class HttpEntities extends \Tester\TestCase {
 		Assert::same(
 			[
 				'method' => 'DELETE',
-				'endpoint' => '/entities/flight:destination',
+				'endpoint' => 'entities/flight:destination',
 				'body' => [],
 			],
 			(new NaturalLanguage\HttpEntities(
