@@ -10,7 +10,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-scripts --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
 
 before_script:
-  - (cd Tests/Config && php -r "file_put_contents('wit.local.ini', str_replace('your_access_token', getenv('ACCESS_TOKEN'), file_get_contents('wit.local.sample.ini')))")
+  - (cd Tests/Config && php -r "file_put_contents('wit.local.ini', str_replace('your_access_token', getenv('ACCESS_TOKEN'), file_get_contents('wit.local.sample.ini')));")
 
 script:
   - ./vendor/bin/phing ci
