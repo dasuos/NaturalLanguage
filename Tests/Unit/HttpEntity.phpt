@@ -34,7 +34,7 @@ final class HttpEntity extends \Tester\TestCase {
 			[
 				'method' => 'PUT',
 				'endpoint' => 'entities/favorite_city',
-				'body' => 	[
+				'body' => [
 					'doc' => 'Pizza types',
 					'lookups' => ['keywords'],
 					'values' => [
