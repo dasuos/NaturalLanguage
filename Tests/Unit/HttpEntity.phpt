@@ -29,7 +29,7 @@ final class HttpEntity extends \Tester\TestCase {
 		);
 	}
 
-	public function testEditingEntityProperties() {
+	public function testEditingEntityPropertiesWithSingleKeyword() {
 		Assert::same(
 			[
 				'method' => 'PUT',
@@ -49,7 +49,19 @@ final class HttpEntity extends \Tester\TestCase {
 				new NaturalLanguage\FakeWit,
 				'favorite_city'
 			))->edit(
-				[
+				'Pizza types',
+				['keywords'],
+				new NaturalLanguage\ExpressedKeyword('Prosciutto', ['Ham'])
+			)
+		);
+	}
+
+	public function testEditingEntityPropertiesWithMultipleKeywords() {
+		Assert::same(
+			[
+				'method' => 'PUT',
+				'endpoint' => 'entities/favorite_city',
+				'body' => [
 					'doc' => 'Pizza types',
 					'lookups' => ['keywords'],
 					'values' => [
@@ -57,9 +69,64 @@ final class HttpEntity extends \Tester\TestCase {
 							'value' => 'Prosciutto',
 							'expressions' => ['Prosciutto', 'Ham'],
 						],
+						[
+							'value' => 'Quattro Formaggi',
+							'expressions' => ['Quattro Formaggi', 'Cheese'],
+							'metadata' => 'food_125',
+						],
 					],
-				]
+				],
+			],
+			(new NaturalLanguage\HttpEntity(
+				new NaturalLanguage\FakeWit,
+				'favorite_city'
+			))->edit(
+				'Pizza types',
+				['keywords'],
+				new NaturalLanguage\ExpressedKeyword('Prosciutto', ['Ham']),
+				new NaturalLanguage\ExpressedKeyword(
+					'Quattro Formaggi',
+					['Cheese'],
+					'food_125'
+				)
 			)
+		);
+	}
+
+	public function testEditingEntityPropertiesWithoutKeywords() {
+		Assert::same(
+			[
+				'method' => 'PUT',
+				'endpoint' => 'entities/favorite_city',
+				'body' => [
+					'doc' => 'Pizza types',
+					'lookups' => ['keywords'],
+				],
+			],
+			(new NaturalLanguage\HttpEntity(
+				new NaturalLanguage\FakeWit,
+				'favorite_city'
+			))->edit(
+				'Pizza types',
+				['keywords']
+			)
+		);
+	}
+
+	public function testThrowingOnInvalidLookupStrategy() {
+		Assert::exception(
+			function() {
+				(new NaturalLanguage\HttpEntity(
+					new NaturalLanguage\FakeWit,
+					'favorite_city'
+				))->edit(
+					'Pizza types',
+					['invalid'],
+					new NaturalLanguage\ExpressedKeyword('Prosciutto', ['Ham'])
+				);
+			},
+			\UnexpectedValueException::class,
+			"Invalid entity lookup strategy 'invalid'"
 		);
 	}
 }

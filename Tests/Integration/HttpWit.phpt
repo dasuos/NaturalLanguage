@@ -59,14 +59,9 @@ final class HttpWit extends \Tester\TestCase {
 					new NaturalLanguage\HttpWit($this->token),
 					'wit$location'
 				))->edit(
-					[
-						'values' => [
-							[
-								'value' => 'Brno',
-								'expressions' => ['Brno'],
-							],
-						],
-					]
+					'These are locations worth going to',
+					['keywords'],
+					new NaturalLanguage\ExpressedKeyword('Prague')
 				);
 			},
 			\UnexpectedValueException::class,
