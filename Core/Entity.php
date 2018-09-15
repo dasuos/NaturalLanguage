@@ -6,5 +6,9 @@ namespace Dasuos\NaturalLanguage;
 interface Entity {
 
 	public function properties(): array;
-	public function edit(array $input): array;
+	public function edit(
+		string $doc,
+		array $lookups,
+		Keyword ...$keywords
+	): array;
 }
