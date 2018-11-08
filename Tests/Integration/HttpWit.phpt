@@ -65,7 +65,7 @@ final class HttpWit extends \Tester\TestCase {
 				);
 			},
 			\UnexpectedValueException::class,
-			"Wit response error: 'You cannot do that'"
+			"Wit response error: 'You cannot update a builtin entity.'"
 		);
 	}
 }

@@ -23,7 +23,7 @@
     "nette/tester": "^2.0.2",
     "jakub-onderka/php-parallel-lint": "^1.0.0",
     "phpstan/phpstan": "^0.10.3",
-    "slevomat/coding-standard": "^4.7.2",
+    "slevomat/coding-standard": "4.7.2",
     "consistence/coding-standard": "^3.5",
     "phing/phing": "^2.16"
   },
