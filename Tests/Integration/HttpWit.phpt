@@ -64,8 +64,7 @@ final class HttpWit extends \Tester\TestCase {
 					new NaturalLanguage\ExpressedKeyword('Prague')
 				);
 			},
-			\UnexpectedValueException::class,
-			"Wit response error: 'You cannot update a builtin entity.'"
+			\UnexpectedValueException::class
 		);
 	}
 }

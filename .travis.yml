@@ -1,3 +1,5 @@
+sudo: required
+
 language: php
 
 php:
@@ -14,6 +16,9 @@ before_script:
 
 script:
   - ./vendor/bin/phing ci
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
   - for i in $(find Tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
