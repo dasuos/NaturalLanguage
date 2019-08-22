@@ -30,4 +30,4 @@ final class HttpMessage extends \Tester\TestCase {
 	}
 }
 
-(new HttpMessage)->run();
+(new HttpMessage())->run();

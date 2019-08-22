@@ -100,4 +100,4 @@ final class HttpEntities extends \Tester\TestCase {
 	}
 }
 
-(new HttpEntities)->run();
+(new HttpEntities())->run();

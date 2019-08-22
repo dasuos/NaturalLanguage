@@ -131,4 +131,4 @@ final class HttpEntity extends \Tester\TestCase {
 	}
 }
 
-(new HttpEntity)->run();
+(new HttpEntity())->run();

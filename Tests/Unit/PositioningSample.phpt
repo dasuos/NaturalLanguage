@@ -151,4 +151,4 @@ final class PositioningSample extends \Tester\TestCase {
 	}
 }
 
-(new PositioningSample)->run();
+(new PositioningSample())->run();

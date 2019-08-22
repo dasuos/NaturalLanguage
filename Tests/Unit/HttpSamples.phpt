@@ -207,4 +207,4 @@ final class HttpSamples extends \Tester\TestCase {
 	}
 }
 
-(new HttpSamples)->run();
+(new HttpSamples())->run();

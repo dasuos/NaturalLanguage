@@ -69,4 +69,4 @@ final class HttpWit extends \Tester\TestCase {
 	}
 }
 
-(new HttpWit)->run();
+(new HttpWit())->run();

@@ -45,4 +45,4 @@ final class ParsedEndpoint extends \Tester\TestCase {
 	}
 }
 
-(new ParsedEndpoint)->run();
+(new ParsedEndpoint())->run();
