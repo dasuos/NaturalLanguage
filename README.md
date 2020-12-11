@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/dasuos/NaturalLanguage.svg?branch=master)](https://travis-ci.org/dasuos/NaturalLanguage)
 [![codecov](https://codecov.io/gh/dasuos/NaturalLanguage/branch/master/graph/badge.svg)](https://codecov.io/gh/dasuos/NaturalLanguage)
 
-Library processing natural language using Wit.ai platform
+Library processing natural language using Wit.ai platform (version: 20180902)
 
 ## Running tests
 
