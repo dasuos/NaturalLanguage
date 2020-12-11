@@ -20,7 +20,7 @@ final class HttpWit extends \Tester\TestCase {
 
 	public function testSendingPostRequest() {
 		Assert::same(
-			['sent' => true, 'n' => 1],
+			['sent' => true, 'n' => 1, 'WARNING' => 'DEPRECATED'],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\HttpWit($this->token)
 			))->validate(
@@ -45,7 +45,7 @@ final class HttpWit extends \Tester\TestCase {
 
 	public function testSendingDeleteRequest() {
 		Assert::same(
-			['sent' => true, 'n' => 1],
+			['sent' => true, 'n' => 1, 'WARNING' => 'DEPRECATED'],
 			(new NaturalLanguage\HttpSamples(
 				new NaturalLanguage\HttpWit($this->token)
 			))->delete('I want to fly to Prague')
