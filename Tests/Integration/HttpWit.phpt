@@ -19,17 +19,17 @@ final class HttpWit extends \Tester\TestCase {
 	use TestCase\AccessToken;
 
 	public function testSendingPostRequest() {
-		Assert::same(
-			['sent' => true, 'n' => 1, 'WARNING' => 'DEPRECATED'],
-			(new NaturalLanguage\HttpSamples(
-				new NaturalLanguage\HttpWit($this->token)
-			))->validate(
-				new NaturalLanguage\PositioningSample(
-					'I want to fly to Prague',
-					['entity' => 'wit$location', 'value' => 'Prague']
-				)
+
+		$response = (new NaturalLanguage\HttpSamples(
+			new NaturalLanguage\HttpWit($this->token)
+		))->validate(
+			new NaturalLanguage\PositioningSample(
+				'I want to fly to Prague',
+				['entity' => 'wit$location', 'value' => 'Prague']
 			)
 		);
+		unset($response['WARNING']);
+		Assert::same(['sent' => true, 'n' => 1], $response);
 	}
 
 	public function testSendingGetRequest() {
@@ -44,12 +44,11 @@ final class HttpWit extends \Tester\TestCase {
 	}
 
 	public function testSendingDeleteRequest() {
-		Assert::same(
-			['sent' => true, 'n' => 1, 'WARNING' => 'DEPRECATED'],
-			(new NaturalLanguage\HttpSamples(
-				new NaturalLanguage\HttpWit($this->token)
-			))->delete('I want to fly to Prague')
-		);
+		$response = (new NaturalLanguage\HttpSamples(
+			new NaturalLanguage\HttpWit($this->token)
+		))->delete('I want to fly to Prague');
+		unset($response['WARNING']);
+		Assert::same(['sent' => true, 'n' => 1], $response);
 	}
 
 	public function testThrowingOnPutRequestOnPredefinedEntity() {
