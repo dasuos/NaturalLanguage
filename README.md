@@ -1,7 +1,5 @@
 # NaturalLanguage
 
-[![codecov](https://codecov.io/gh/dasuos/NaturalLanguage/branch/master/graph/badge.svg)](https://codecov.io/gh/dasuos/NaturalLanguage)
-
 Library processing natural language using Wit.ai platform (version: 20180902)
 
 ## Running tests
